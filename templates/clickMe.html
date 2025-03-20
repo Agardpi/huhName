@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome!</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+        background-color: #222;
+        color: white;
+        transition: background-color 0.5s ease;
+      }
+
+      h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+      }
+
+      #prankButton {
+        padding: 15px 30px;
+        font-size: 1.5em;
+        background-color: #3498db;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .shake {
+        animation: shake 0.5s infinite;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translate(1px, 1px) rotate(0deg);
+        }
+        25% {
+          transform: translate(-1px, -2px) rotate(-1deg);
+        }
+        50% {
+          transform: translate(-3px, 0px) rotate(1deg);
+        }
+        75% {
+          transform: translate(2px, 2px) rotate(0deg);
+        }
+        100% {
+          transform: translate(1px, -1px) rotate(1deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to My Cool Page!</h1>
+    <button id="prankButton">Click Me</button>
+
+    <script>
+      const colors = [
+        "#e74c3c",
+        "#2ecc71",
+        "#9b59b6",
+        "#f1c40f",
+        "#1abc9c",
+        "#e67e22",
+        "#3498db",
+      ];
+      const body = document.body;
+      const button = document.getElementById("prankButton");
+      let prankStarted = false;
+
+      // Start the prank after 5 seconds
+      setTimeout(() => {
+        prankStarted = true;
+        button.classList.add("shake");
+        startColorFlash();
+      }, 5000);
+
+      // Flash background colors
+      function startColorFlash() {
+        setInterval(() => {
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          body.style.backgroundColor = randomColor;
+          button.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+        }, 300);
+      }
+
+      // Move the button randomly when hovered
+      button.addEventListener("mouseover", () => {
+        if (prankStarted) {
+          const x = Math.random() * (window.innerWidth - button.offsetWidth);
+          const y = Math.random() * (window.innerHeight - button.offsetHeight);
+          button.style.position = "absolute";
+          button.style.left = `${x}px`;
+          button.style.top = `${y}px`;
+        }
+      });
+
+      // Display a funny message if clicked
+      button.addEventListener("click", () => {
+        if (prankStarted) {
+          alert("Whoa! You actually clicked me?! You're fast!");
+        } else {
+          alert("Nice click! But something's coming... 😈");
+        }
+      });
+    </script>
+  </body>
+</html>

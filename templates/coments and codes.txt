@@ -1,0 +1,3 @@
+ {% if request.path != '/about' %}
+          <li><input type="text" class="inputSections"></input> <button for="Search" id="myButton" class="myButtons">Search</button>  </li>
+           {% endif %} 
